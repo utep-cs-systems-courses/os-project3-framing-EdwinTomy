@@ -8,13 +8,11 @@ def text_to_bytes(file_name):
         bytes_arr.append(bin(i))
     bytes_arr[0] = bin(file_name_len)
 
-    # stores byte representation of file content and its length
-    bytes_arr.append(0)
+    # stores byte representation of file content
     file_content_len = 0
     for i in open(file_name, "rb").read():
         file_content_len += 1
         bytes_arr.append(bin(i))
-    bytes_arr[file_name_len+1] = bin(file_content_len)
 
     return bytes_arr
 
@@ -28,7 +26,7 @@ def bytes_to_text(bytes_arr):
 
     # read file content
     f = open(filename, "w")
-    for i in bytes_arr[int(bytes_arr[0], 2) + 2:]:
+    for i in bytes_arr[int(bytes_arr[0], 2) + 1:]:
         f.write(chr(int(i, 2)))
 
 
