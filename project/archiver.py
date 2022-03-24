@@ -17,8 +17,7 @@ def files_to_bytes(file_lst):
         for i in file_name.encode():
             file_name_len += 1
             bytes_arr.append(bin(i))
-        bytes_arr[init_address] = bin(file_name_len)
-
+        bytes_arr[init_address] = bin(init_address+file_name_len)
 
         # stores byte representation of file content
         content_address = len(bytes_arr)
@@ -27,9 +26,9 @@ def files_to_bytes(file_lst):
         for i in open(file_name, "rb").read():
             file_content_len += 1
             bytes_arr.append(bin(i))
-        bytes_arr[content_address] = bin(file_content_len)
+        bytes_arr[content_address] = bin(file_content_len+content_address)
 
-    print(chr(int((bytes_arr[1969]), 2)))
+
     return bytes_arr
 
 
@@ -37,6 +36,7 @@ def bytes_to_files(bytes_arr):
 
     for j in range(int(bytes_arr[0], 2)):
         init_address = int(bytes_arr[j+1], 2)
+        content_address = int(bytes_arr[init_address], 2) + 1
 
         # read file name
         filename = "new_"
@@ -44,22 +44,15 @@ def bytes_to_files(bytes_arr):
         print('begin', (init_address + 1))
         print('end', (init_address + int(bytes_arr[init_address], 2) + 1))
 
-        for i in bytes_arr[init_address + 1: init_address + int(bytes_arr[init_address], 2) + 1]:
+        for i in bytes_arr[init_address + 1: content_address]:
             filename += chr(int(i, 2))
         print(filename)
 
-
         # read file content
         f = open(filename, "w")
-        end_content = len(byte_arr) if j == int(bytes_arr[0], 2)-1 else int(bytes_arr[j+2], 2)
-
-        print('begin', (init_address + int(bytes_arr[init_address], 2) + 1), chr(int(byte_arr[init_address + int(bytes_arr[init_address], 2) + 1], 2)))
-        print('end', (end_content), chr(int((byte_arr[end_content-1]), 2)))
-
-
-        for i in bytes_arr[init_address + int(bytes_arr[init_address], 2) + 1:end_content]:
+        for i in bytes_arr[content_address + 1: int(bytes_arr[content_address], 2) + 1]:
             f.write(chr(int(i, 2)))
 
 
-byte_arr = files_to_bytes(["fiesta_salsa.txt", "francesco.txt", "sasageyo.txt"])
+byte_arr = files_to_bytes(["hola.txt", "como.txt", "sasageyo.txt", "photo.png"])
 bytes_to_files(byte_arr)
