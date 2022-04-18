@@ -9,7 +9,7 @@ import params
 
 
 switchesVarDefaults = (
-    (('-l', '--listenPort') ,'listenPort', 50001),
+    (('-l', '--listenPort') ,'listenPort', 50002),
     (('-?', '--usage'), "usage", False), # boolean (set if present)
     )
 
@@ -33,7 +33,7 @@ while True:
     conn, addr = s.accept() # wait until incoming connection request (and accept it)
     if os.fork() == 0:      # child becomes server
         print('Connected by', addr)
-        byte_arr = archiver.files_to_bytes(["francesco.txt", "sasageyo.txt"])
+        byte_arr = archiver.files_to_bytes(["fiesta_salsa.txt"])
         conn.send(byte_arr)
         conn.shutdown(socket.SHUT_WR)
 

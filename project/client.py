@@ -3,37 +3,37 @@
 # Echo client program
 import socket, sys, re, time
 import archiver
-sys.path.append("../lib")       # for params
+
+sys.path.append("../lib")  # for params
 import params
 
 switchesVarDefaults = (
     (('-s', '--server'), 'server', "127.0.0.1:50001"),
     (('-d', '--delay'), 'delay', "0"),
-    (('-?', '--usage'), "usage", False), # boolean (set if present)
-    )
+    (('-?', '--usage'), "usage", False),  # boolean (set if present)
+)
 
-
-progname = "framedClient"
+progName = "framedClient"
 paramMap = params.parseParams(switchesVarDefaults)
 
-server, usage  = paramMap["server"], paramMap["usage"]
+server, usage = paramMap["server"], paramMap["usage"]
 
 if usage:
     params.usage()
 
 try:
-    serverHost, serverPort = re.split(":", server)
-    serverPort = int(serverPort)
+    server_host, server_port = re.split(":", server)
+    server_port = int(server_port)
 except:
     print("Can't parse server:port from '%s'" % server)
     sys.exit(1)
 
 s = None
-for res in socket.getaddrinfo(serverHost, serverPort, socket.AF_UNSPEC, socket.SOCK_STREAM):
-    af, socktype, proto, canonname, sa = res
+for res in socket.getaddrinfo(server_host, server_port, socket.AF_UNSPEC, socket.SOCK_STREAM):
+    af, sock_type, proto, canon_name, sa = res
     try:
-        print("creating sock: af=%d, type=%d, proto=%d" % (af, socktype, proto))
-        s = socket.socket(af, socktype, proto)
+        print("creating sock: af=%d, type=%d, proto=%d" % (af, sock_type, proto))
+        s = socket.socket(af, sock_type, proto)
     except socket.error as msg:
         print(" error: %s" % msg)
         s = None
@@ -52,7 +52,7 @@ if s is None:
     print('could not open socket')
     sys.exit(1)
 
-delay = float(paramMap['delay']) # delay before reading (default = 0s)
+delay = float(paramMap['delay'])  # delay before reading (default = 0s)
 if delay != 0:
     print(f"sleeping for {delay}s")
     time.sleep(int(delay))

@@ -42,7 +42,7 @@ def bytes_to_files(int_arr):
 
     for j in range(bytes_arr[0]):
         init_address = bytes_arr[j+1]
-        content_address = bytes_arr[init_address]+ 1
+        content_address = bytes_arr[init_address] + 1
 
         # read file name
         filename = "new_"
@@ -51,7 +51,7 @@ def bytes_to_files(int_arr):
 
         # read file content
         f = open(filename, "w")
-        for i in bytes_arr[content_address + 1: bytes_arr[content_address]+ 1]:
+        for i in bytes_arr[content_address + 1: bytes_arr[content_address] + 1]:
             f.write(chr(i))
 
 
