@@ -30,7 +30,7 @@ def archive(file_name_lst):
     return arr
 
 
-def unarchive(bytes_arr, num_digits=10):
+def unarchive(bytes_arr, file_prefix, num_digits=10):
 
     num_files = int(bytes_arr[:num_digits].decode('utf-8'))
     lengths = []
@@ -44,7 +44,7 @@ def unarchive(bytes_arr, num_digits=10):
         file_name = bytes_arr[:lengths[2*j]].decode()
         bytes_arr = bytes_arr[lengths[2*j]:]
 
-        with open('new_' + file_name, "wb") as f:
+        with open(file_prefix + '_' + file_name, "wb") as f:
             f.write(bytes_arr[:lengths[2*j+1]])
             bytes_arr = bytes_arr[lengths[2*j+1]:]
 
@@ -74,8 +74,8 @@ def unarchive(bytes_arr, num_digits=10):
 # # print(x1[0:3])
 # # print(len(x1))
 #
-# byte_arr = archive(["fiesta_salsa.txt", "francesco.txt", "sasageyo.txt", "image.png"])
-# unarchive(byte_arr)
+#byte_arr = archive(["fiesta_salsa.txt", "francesco.txt", "sasageyo.txt", "image.png"])
+#unarchive(byte_arr)
 # # arr = bytearray()
 # # arr.extend(bytes([127]))
 # # print(arr)  .decode('cp437')

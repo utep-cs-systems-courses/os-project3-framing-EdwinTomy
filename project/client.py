@@ -59,10 +59,12 @@ if delay != 0:
     print("done sleeping")
 
 while 1:
-    byte_arr = s.recv(1024).decode()
-    print("Received '%s'" % byte_arr)
+    byte_arr = s.recv(1024)
+    print("Hello")
+    print(byte_arr)
+    print("Received")
     if len(byte_arr) == 0:
         break
-    archiver.bytes_to_files(byte_arr)
+    archiver.unarchive(byte_arr, "client1")
 print("Zero length read.  Closing")
 s.close()
