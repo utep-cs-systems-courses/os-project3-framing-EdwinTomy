@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 # Echo client program
-import socket, sys, re, time
+import os, socket, sys, re, time
 import archiver
 
 sys.path.append("../lib")  # for params
@@ -58,13 +58,16 @@ if delay != 0:
     time.sleep(int(delay))
     print("done sleeping")
 
+# Opening sending files to server
+byte_arr = archiver.archive([ "fiesta_salsa.txt", "image.png"])
+s.send(byte_arr)
+s.shutdown(socket.SHUT_WR)
+
 while 1:
     byte_arr = s.recv(1024)
-    print("Hello")
-    print(byte_arr)
     print("Received")
     if len(byte_arr) == 0:
         break
-    archiver.unarchive(byte_arr, "client2")
+
 print("Zero length read.  Closing")
 s.close()

@@ -48,41 +48,6 @@ def unarchive(bytes_arr, file_prefix, num_digits=10):
             f.write(bytes_arr[:lengths[2*j+1]])
             bytes_arr = bytes_arr[lengths[2*j+1]:]
 
+# byte_arr = archive(["image.png"])
+# unarchive(byte_arr)
 
-
-# #byte_arr = files_to_bytes(["fiesta_salsa.txt", "francesco.txt", "sasageyo.txt"])
-# #print(byte_arr[:244])
-# #bytes_to_files(byte_arr)
-#
-# #
-# # x = bytes([105])
-# # print(x)
-# # x = bytes([100])
-# # print(x)
-# # x = bytes([107])
-# # print(x)
-# # x = bytes([112])
-# # print(x)
-# # x = bytes([132])
-# # print(x)
-# # #########
-# # x1 = bytearray(x)
-# # print(x1)
-# # x1 = bytearray(b'idkp\x84vkp\xc8x')
-# # print(x1)
-# #
-# # print(x1[0:3])
-# # print(len(x1))
-#
-#byte_arr = archive(["fiesta_salsa.txt", "francesco.txt", "sasageyo.txt", "image.png"])
-#unarchive(byte_arr)
-# # arr = bytearray()
-# # arr.extend(bytes([127]))
-# # print(arr)  .decode('cp437')
-# # print(arr.decode())
-# # for i in range(20):
-# #     print(str(i))
-# #     print(bytearray(bytes(str(i), 'utf-8')))
-# #
-# #
-# #
